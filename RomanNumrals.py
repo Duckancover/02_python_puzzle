@@ -1,45 +1,26 @@
-data = 90
-
-I = 1 #0
-V = 5 #1
-X = 10 #2
-L = 50 #3
-C = 100 #4
-D = 500
-M = 1000
-r = []
-w = ["I", "V", "X", "L", "C"]
-a = [1, 5, 10, 50, 100]
-count = -1
-for i in a: 
-    if data // i > 0:
-        count +=1
-        print("fff",count)
-#if count % 2 == 0:
-#    count +=1
-print ("count",count)
-
-
-q = [9, 0]
+data = 50
+r =""
+w = ["I", "V", "X", "L", "C", "D", "M"]
+a = [ 1,   5,   10,  50, 100, 500, 1000]
+q = [int(i) for i in str(data)]
+g = 2*(len(q)-1)
 for i in q:
-    print ("____________________________")
-    if i % 5 >= 4:
-        print ("hre", 1)
-        r.append((w[count-1], w[count+1]))
-        print ("iftrue",r)
+    print (g)
+    print (i)
+    if i == 5:
+        r +=w[g+1]
+        
+    elif i < 5:
+        if i <= 3: 
+            r +=w[g]*i
+            
+        else:
+            r += w[g]+w[g+1]
     else:
-        r.append(w[count]*(i % 5))
-        print ("elsetrue",r)
-    count -=1
-
+        if i == 9: 
+            r += w[g]+w[g+2]
+        else:
+            r += w[g+1]+w[g]*(i-5)
+    g = g - 2        
+    
 print (r)
-
-
-
-"""
-if y >= 4:
-    print ("X",(10-data)*"I")
-else:
-    print ("V", y*"I")  
-print (y, x) 
-"""
