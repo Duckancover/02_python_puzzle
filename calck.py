@@ -1,17 +1,22 @@
 m = [-50, 50, 1]
-z = 0
-def rlen(y):
-    if len(y) == 0:
-        return print("cvbcbcvb",z)
-        
-    else:
-        return popsum(y)
-        
-def popsum(x):
-    global z
-    z = z + x.pop()
-    print (z)
-    return rlen(x)
-#    return z 
 
-popsum([2,2,2,2,2,2])
+def popsum(z, x):
+    z += x.pop()
+    #print (z)
+    return rlen(z, x)
+
+
+def rlen(z, y):
+    if len(y) == 0:
+        return print(z)
+                
+    else:
+        return popsum(z, y)
+
+def push(x):
+    z = 0
+    return popsum(z, x)
+
+push([1,2,2,2,2,2]) # 11
+push([1,2,2,2,2]) #9
+
