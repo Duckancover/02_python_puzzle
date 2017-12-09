@@ -21,7 +21,7 @@ def checkio(a):
                 q = c
          #       print("true RC:", r,c)
           #      print("check", r,c)
-                while (a[r][c] == a[s+1][q] and s >=0):  #to down
+                while a[r][c] == a[s+1][q]:  #to down
                     res1 +=1
                     s = s + 1
                     print ("down - ",res1)
@@ -35,7 +35,7 @@ def checkio(a):
             try:
                 s = r
                 q = c
-                while (a[r][c] == a[s+1][q+1] and s >=0):  #to diag down
+                while a[r][c] == a[s+1][q+1]:  #to diag down
                     res2 +=1
                     s = s +1
                     q += 1
@@ -51,7 +51,7 @@ def checkio(a):
             try:
                 s = r
                 q = c
-                while (a[r][c] == a[s][q+1] and s >=0):  #to right
+                while (a[r][c] == a[s][q+1]):  #to right
                     res3 +=1
                     q += 1
                     print ("right - ",res3)
@@ -61,23 +61,29 @@ def checkio(a):
                 else:
                     res3 = 0
             except IndexError:
+                res3 = 0                
                 pass
             
             try:
                 s = r
                 q = c
-                while (a[r][c] == a[s-1][q+1] and s >=0):  #to diag up
+                while a[r][c] == a[s-1][q+1]:  #to diag up
                     res4 +=1
                     q += 1
                     s -= 1
-                    print ("diag up ---",res4)
+                    print(s, "ssssssss")
+                    if s < 0:
+                        res4 = 0
+                    print ("diag up ----------",res4)
                     if res4 == 3:
                         done = True
+                        res4 = 0
+                        print("ddddddd",res4)
                     
                 else:
                     res4 = 0
             except IndexError:
-                pass
+                res4 = 0
     if done is True:
         return True
     else:
