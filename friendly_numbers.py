@@ -1,8 +1,8 @@
-number = 4294967297
-base = 2
-decimals=0
+number = 4000000001
+base = 1024
+decimals=1
 suffix=''
-powers=["p0","p1","p2","p3","p4","p5","p6","p7","p8","p9","p10","p11","p12","p13","p14","p15","p16","p17","p18","p19","p20","p21","p22","p23","p24","p25","p26","p27","p28","p29","p30","p31"]
+powers=['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']
 ff = ""
 
 num = abs(number)
@@ -11,19 +11,20 @@ power = 0
 dig = len(str(base))-1
 if dig == 0:
     dig = 1
-#print("dig=", dig)
+print("dig=", dig)
 #print(len(powers))
 
 while num >= base:
     x = divmod(num, base)
 
-    if x[1] == 0:
-        n_based.append("0"*1)
+    if len(str(x[1])) < dig:
+        n_based.append("0"*dig)
     else:
         n_based.append(str(x[1]))
     num = x[0]
     power += 1
 print(power)
+print(n_based)
 
     
 if power >= len(powers):
@@ -37,10 +38,12 @@ n_based.append(str(num))
 n_based.reverse()
 n_str = "".join(n_based)
 
-print("n_str", n_str)
+print("n_str==", n_str)
 
 if decimals == 0:
     core_n = str(round(int(n_str)//(10 ** (dig * power)), decimals))
+    if base < 30:
+        core_n = str(int(core_n, base))
     
 
 else:
