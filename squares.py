@@ -5,43 +5,50 @@ Created on Wed Dec 20 17:36:34 2017
 @author: Oleg.Shcherbinin
 """
 
-a = [[3, 4], [6, 2], [2, 3],[11, 12],[4,8],[8,12],[10,11],[6,10],[6,7],[3,7]]
-len1 = []
-len2 = []
-len3 = []
-c = 0
-a1 = [sorted(i) for i in a]
-print(a1)
+lines_list = [[1, 2], [3, 4], [1, 5], [2, 6], [4, 8], [5, 6], [6, 7],
+                     [7, 8], [6, 10], [7, 11], [8, 12], [10, 11],
+                     [10, 14], [12, 16], [14, 15], [15, 16]]
 
+horizontal_lines = []
+count = 0
+progress = 0
 
+sorted_data = [sorted(i) for i in lines_list]
 for i in range(1,12):
-    if [i, i+1] in a1:
-        len1.append([i, i+1])
-        if [i+1, i+2] in a1:
-            len1.append([i, i+1, i+2])
-            if [i+2, i+3] in a1:
-                len1.append([i, i+1, i+2, i+3])
+    if [i, i+1] in sorted_data:
+        horizontal_lines.append([i, i+1])
+        if [i+1, i+2] in sorted_data:
+            horizontal_lines.append([i, i+1, i+2])
+            if [i+2, i+3] in sorted_data:
+                horizontal_lines.append([i, i+1, i+2, i+3])
 
-print("len1==",len1)
-print(len(a1[0]))
-
-for r in len1:
-    c += 1
-    print("iter----------", c)
-    for i in range(1, len(r)):
-        x = 4*(i-1)
-        y = 4*i
-        print(r[0]+x, r[0]+y)
-        print(r[-1]+x, r[-1]+y) 
-        #print(r[0]+4 * (len(r)-1), r[0]+4 * (len(r)-1)+1)
-        if [r[0]+x, r[0]+y] not in a1:
+for line in horizontal_lines:
+    for i in range(1, len(line)):
+        """
+        this cycle takes horizontal continuous line 
+        and check vertical edges -- idexes [0], [-1]
+        than check bottom line -- offet based on line[0] with distance 4 * len(line)
+        """
+        start_index = 4*(i-1)  #start index for left vertical edge of square, offset depends on lenght of line
+        end_index = 4*i   #end index for left vertical edge of square, offset depends on lenght of line
+        
+        bot_line_start_index = line[0]+4*(len(line)-1)+(i-1)
+        bot_line_end_index = line[0]+4*(len(line)-1)+i
+        
+        if [line[0]+start_index, line[0]+end_index] not in sorted_data:
+            progress = 0            
             break
-        elif [r[-1]+x, r[-1]+y] not in a1:
+        elif [line[-1]+start_index, line[-1]+end_index] not in sorted_data:
+            progress = 0            
             break
-        elif[r[0]+(4 * (len(r)-1)), ] not in a1:
+        elif [bot_line_start_index, bot_line_end_index] not in sorted_data:
+            progress = 0
             break
         else:
-            print("good")
-       
+            progress +=1
+    if progress > 0:
+        count +=1
+
+print(count)
 
             
